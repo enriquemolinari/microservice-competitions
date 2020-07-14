@@ -1,4 +1,4 @@
-package competition.model.api;
+package competition.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import competition.model.api.RadioCompetition;
-import competition.model.api.RadioProgram;
+import competition.model.RadioCompetition;
+import competition.model.RadioProgram;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 

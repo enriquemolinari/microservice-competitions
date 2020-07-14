@@ -1,1 +1,9 @@
 - tengo que quitar la interfaz Notification, ya que no va mas ahora con microservices.
+- saque el paquete model.api completo, movi las interfaces a model
+
+/etc/init.d/redis-server stop
+/etc/init.d/redis-server start
+
+redis-cli info
+redis-cli info stats
+redis-cli info server

@@ -1,4 +1,4 @@
-package competition.model.api;
+package competition.model;
 
 public interface RadioProgram {
 

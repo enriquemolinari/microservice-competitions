@@ -3,8 +3,6 @@ package competition.model;
 import java.util.List;
 import java.util.Optional;
 
-import competition.model.api.RadioCompetition;
-
 public interface CompetitionRepository {
 
 	Optional<RadioCompetition> competitionBy(int id);

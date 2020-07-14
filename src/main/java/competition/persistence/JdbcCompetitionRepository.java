@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 import competition.model.CompetitionRepository;
+import competition.model.RadioCompetition;
 import competition.model.RadioException;
-import competition.model.api.RadioCompetition;
 
 public class JdbcCompetitionRepository implements CompetitionRepository {
 

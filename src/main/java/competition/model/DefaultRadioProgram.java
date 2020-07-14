@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import competition.model.api.RadioCompetition;
-import competition.model.api.RadioProgram;
-
 public class DefaultRadioProgram implements RadioProgram {
 
  private CompetitionRepository repository;
