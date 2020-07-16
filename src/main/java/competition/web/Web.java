@@ -22,6 +22,20 @@ public class Web {
  public void start() {
   Javalin app = Javalin.create().start(this.webPort);
   app.get("/competitions", allCompetitions());
+  app.post("/inscription", addInscription());
+  
+  app.exception(Exception.class, (e, ctx) -> {
+   ctx.json(Map.of("error", "Ups, somethong went wrong..."));
+   //log error in a stream...
+  });
+ }
+
+ private Handler addInscription() {
+  return ctx -> {
+   InscriptionData dto = ctx.bodyAsClass(InscriptionData.class);
+   radioProgram.addInscription(dto.getIdCompetition(), dto.getIdCompetitor());
+   ctx.json(Map.of("result","successful"));
+  };
  }
 
  private Handler allCompetitions() {

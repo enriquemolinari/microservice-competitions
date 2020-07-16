@@ -1,12 +1,12 @@
 package competition.model;
 
-public class InscriptionEvent implements RadioProgram {
+public class PublishInscriptionAdded implements RadioProgram {
 
- private String EVENT_NAME = "inscription-done";
+ private String EVENT_NAME = "inscription-added";
  private RadioProgram radioProgram;
  private Event event;
 
- public InscriptionEvent(RadioProgram radioProgram,
+ public PublishInscriptionAdded(RadioProgram radioProgram,
    Event notification) {
   this.radioProgram = radioProgram;
   this.event = notification;
@@ -20,6 +20,7 @@ public class InscriptionEvent implements RadioProgram {
  @Override
  public void addInscription(int idCompetition, int idCompetitor) {
   this.radioProgram.addInscription(idCompetition, idCompetitor);
-  event.publish(EVENT_NAME, String.valueOf(idCompetitor));
+  event.publish(EVENT_NAME,
+    new InscriptionAdded(idCompetitor, "unemail@gmail.com").toJson());
  }
 }
