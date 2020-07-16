@@ -21,6 +21,8 @@ public class PublishInscriptionAdded implements RadioProgram {
  public void addInscription(int idCompetition, int idCompetitor) {
   this.radioProgram.addInscription(idCompetition, idCompetitor);
   event.publish(EVENT_NAME,
-    new InscriptionAdded(idCompetitor, "unemail@gmail.com").toJson());
+    new InscriptionAdded(idCompetitor, "unemail@gmail.com",
+      "Inscription Added Successfully",
+      "You have been enrolled successfully").toJson());
  }
 }
