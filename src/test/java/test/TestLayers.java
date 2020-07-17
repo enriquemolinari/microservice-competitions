@@ -1,4 +1,4 @@
-package test1.test;
+package test;
 
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 import org.junit.Test;
