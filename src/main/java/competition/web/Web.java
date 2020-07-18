@@ -32,6 +32,7 @@ public class Web {
 
   app.exception(Exception.class, (e, ctx) -> {
    ctx.json(Map.of("result", "error", "message", "Ups, somethong went wrong"));
+   e.printStackTrace();
    //log error in a stream...
   });
  }

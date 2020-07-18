@@ -3,6 +3,7 @@ package main;
 import java.util.Objects;
 
 import competition.infrastructure.JdbcCompetitionRepository;
+import competition.infrastructure.JdbcListenerRepository;
 import competition.infrastructure.RedisEvent;
 import competition.model.DefaultRadioProgram;
 import competition.model.NewListener;
@@ -26,20 +27,18 @@ public class Main {
   var redis = new RedisEvent("localhost", 6379);
 
   // Starting Web App ...
-  new Web(new PublishInscriptionAdded(new DefaultRadioProgram(
-    new JdbcCompetitionRepository(user, pass, connString)), redis), 7000)
+  new Web(new PublishInscriptionAdded(
+    new DefaultRadioProgram(
+      new JdbcCompetitionRepository(user, pass, connString)),
+    new JdbcListenerRepository(user, pass, connString), redis), 7000)
       .start();
 
-  System.out.println("aaaa");
-  
   // Starting subcription to NewListener
   new Thread("subscription-to-redis") {
    public void run() {
-    new NewListener(null, redis).startListening();
+    new NewListener(new JdbcListenerRepository(user, pass, connString),
+      redis).startListening();
    }
   }.start();
-  
-  System.out.println("bbbb");
-
  }
 }

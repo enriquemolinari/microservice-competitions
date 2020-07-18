@@ -12,6 +12,4 @@ public interface CompetitionRepository {
 
 	List<RadioCompetition> competitionsForInscription()
 			throws RadioException;
-
- void addNewListener(int idListener, String email);
 }

@@ -1,7 +1,6 @@
 package competition.infrastructure;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,20 +16,16 @@ import competition.model.RadioException;
 
 public class JdbcCompetitionRepository implements CompetitionRepository {
 
- private String user;
- private String pwd;
- private String connString;
+ private JdbcConn conn;
 
- public JdbcCompetitionRepository(String user, String pwd, String connString) {
-  this.user = user;
-  this.pwd = pwd;
-  this.connString = connString;
+ public JdbcCompetitionRepository(String user, String pwd,
+   String connString) {
+  this.conn = new JdbcConn(user, pwd, connString);
  }
 
  @Override
  public Optional<RadioCompetition> competitionBy(int id) {
-
-  Connection c = connection();
+  Connection c = this.conn.connection();
   try {
 
    var checkCompetitionSt = c
@@ -62,12 +57,12 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
  public void addInscription(int idCompetitor, int idCompetition,
    int addPoints) {
 
-  Connection c = connection();
+  Connection c = this.conn.connection();
   try {
    c.setAutoCommit(false);
 
-   var actualPoints = c.prepareStatement(
-     "select id_listener, points" + " from competitor " + "where id_listener = ?");
+   var actualPoints = c.prepareStatement("select id_listener, points"
+     + " from competitor " + "where id_listener = ?");
 
    actualPoints.setInt(1, idCompetitor);
 
@@ -75,7 +70,7 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
 
    if (resultSet.next()) {
     addPoints += resultSet.getInt("points");
-    
+
     var st = c.prepareStatement(
       "update competitor set points = ? where id_listener = ?");
 
@@ -83,7 +78,7 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
     st.setInt(2, idCompetitor);
     st.executeUpdate();
    } else {
-    
+
     var st = c.prepareStatement(
       "insert into competitor(id_listener, points) " + "values(?,?)");
 
@@ -120,7 +115,7 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
 
  @Override
  public List<RadioCompetition> competitionsForInscription() {
-  Connection c = connection();
+  Connection c = this.conn.connection();
   try {
    PreparedStatement st = c
      .prepareStatement("select id, description, rules, start_date, "
@@ -153,7 +148,6 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
 
  private RadioCompetition toCompetition(ResultSet resultSet) {
   try {
-
    int id = resultSet.getInt("id");
    var description = resultSet.getString("description");
    var rules = resultSet.getString("rules");
@@ -196,21 +190,5 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
   } catch (SQLException e) {
    throw new RadioException(e);
   }
- }
-
- private Connection connection() {
-  String url = this.connString;
-  String user = this.user;
-  String password = this.pwd;
-  try {
-   return DriverManager.getConnection(url, user, password);
-  } catch (SQLException e) {
-   throw new RadioException(e);
-  }
- }
-
- @Override
- public void addNewListener(int idListener, String email) {
-  
  }
 }

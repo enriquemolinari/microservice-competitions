@@ -6,10 +6,10 @@ public class NewListener implements OnMessageReceived {
 
  private static final String EMAIL = "email";
  private static final String ID_LISTENER = "idListener";
- private CompetitionRepository repository;
+ private ListenerRepository repository;
  private Event event;
 
- public NewListener(CompetitionRepository repository, Event event) {
+ public NewListener(ListenerRepository repository, Event event) {
   this.repository = repository;
   this.event = event;
  }
