@@ -1,4 +1,4 @@
-package competition.persistence;
+package competition.infrastructure;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -209,4 +209,8 @@ public class JdbcCompetitionRepository implements CompetitionRepository {
   }
  }
 
+ @Override
+ public void addNewListener(int idListener, String email) {
+  
+ }
 }

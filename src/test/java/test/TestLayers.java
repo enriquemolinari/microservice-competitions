@@ -17,5 +17,4 @@ public class TestLayers {
     .whereLayer("Persistence").mayNotBeAccessedByAnyLayer()
     .check(new ClassFileImporter().importPackages("competition"));
  }
-
 }

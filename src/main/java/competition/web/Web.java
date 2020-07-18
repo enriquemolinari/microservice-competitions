@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import competition.model.RadioCompetition;
+import competition.model.RadioException;
 import competition.model.RadioProgram;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
@@ -24,8 +25,13 @@ public class Web {
   app.get("/competitions", allCompetitions());
   app.post("/inscription", addInscription());
   
+  app.exception(RadioException.class, (e, ctx) -> {
+   ctx.json(Map.of("result", "error", "message", e.getMessage()));
+   // log error in a stream...
+  });
+
   app.exception(Exception.class, (e, ctx) -> {
-   ctx.json(Map.of("error", "Ups, somethong went wrong..."));
+   ctx.json(Map.of("result", "error", "message", "Ups, somethong went wrong"));
    //log error in a stream...
   });
  }
@@ -34,13 +40,14 @@ public class Web {
   return ctx -> {
    InscriptionData dto = ctx.bodyAsClass(InscriptionData.class);
    radioProgram.addInscription(dto.getIdCompetition(), dto.getIdCompetitor());
-   ctx.json(Map.of("result","successful"));
+   ctx.json(Map.of("result","success"));
   };
  }
 
  private Handler allCompetitions() {
   return ctx -> {
    var competitions = radioProgram.availableCompetitions();
+   
    var list = new ArrayList<Map<String, String>>();
 
    for (RadioCompetition c : competitions) {
@@ -54,7 +61,7 @@ public class Web {
     toJson.put("start-date", c.startDate().toString());
     list.add(toJson);
    }
-   ctx.json(list);
+   ctx.json(Map.of("result", "success", "competitions", list));
   };
  }
 }
