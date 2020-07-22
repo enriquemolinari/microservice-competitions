@@ -6,15 +6,21 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class NewListenerEvent {
- private String msgAsJson;
+ private static final String EMAIL = "email";
+ private static final String ID_LISTENER = "idListener";
+ private Map<String, String> map;
 
  public NewListenerEvent(String message) {
-  this.msgAsJson = message;
+  this.map =  new Gson().fromJson(message,
+    new TypeToken<Map<String, String>>() {
+   }.getType());
  }
-
- public Map<String, String> toMap() {
-  return new Gson().fromJson(this.msgAsJson,
-     new TypeToken<Map<String, String>>() {
-    }.getType());
+ 
+ public int idListener() {
+  return Integer.valueOf(this.map.get(ID_LISTENER)); 
+ }
+ 
+ public String email() {
+  return this.map.get(EMAIL); 
  }
 }
