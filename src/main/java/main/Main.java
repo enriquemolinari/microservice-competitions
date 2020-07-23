@@ -23,8 +23,14 @@ public class Main {
   String pass = Objects.requireNonNull(System.getProperty("pwd"),
     "specify a database pwd as a jvm argument");
 
+  String pubsub = Objects
+    .requireNonNullElse(System.getProperty("pub-sub-server"), "localhost");
+
+  String pubsubPort = Objects
+    .requireNonNullElse(System.getProperty("pub-sub-port"), "6379");
+
   // Redis event
-  var redis = new RedisEvent("localhost", 6379);
+  var redis = new RedisEvent(pubsub, Integer.valueOf(pubsubPort));
 
   // Starting Web App ...
   new Web(new PublishInscriptionAdded(
