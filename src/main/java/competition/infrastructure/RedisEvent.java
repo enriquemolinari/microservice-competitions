@@ -6,7 +6,6 @@ import redis.clients.jedis.Jedis;
 
 public class RedisEvent implements Event {
 
- private String CHANNEL_NAME = "new-listener";
  private String host;
  private int port;
 
@@ -21,12 +20,11 @@ public class RedisEvent implements Event {
    j.publish(type, value);
   }
  }
- 
+
  @Override
- public void listenTo(OnMessageReceived onMessage) {
+ public void listenTo(String msgName, OnMessageReceived onMessage) {
   try (Jedis jSubscriber = new Jedis(this.host, this.port)) {
-   jSubscriber.subscribe(new RedisMessageReceived(onMessage),
-     CHANNEL_NAME);
+   jSubscriber.subscribe(new RedisMessageReceived(onMessage), msgName);
   }
  }
 }

@@ -24,33 +24,36 @@ public class Web {
   Javalin app = Javalin.create().start(this.webPort);
   app.get("/competitions", allCompetitions());
   app.post("/inscription", addInscription());
-  
+
   app.exception(RadioException.class, (e, ctx) -> {
    ctx.json(Map.of("result", "error", "message", e.getMessage()));
    // log error in a stream...
   });
 
   app.exception(Exception.class, (e, ctx) -> {
-   ctx.json(Map.of("result", "error", "message", "Ups, somethong went wrong"));
+   ctx.json(
+     Map.of("result", "error", "message", "Ups, somethong went wrong"));
    e.printStackTrace();
-   //log error in a stream...
+   // log error in a stream...
   });
  }
 
  private Handler addInscription() {
   return ctx -> {
    InscriptionData dto = ctx.bodyAsClass(InscriptionData.class);
-   radioProgram.addInscription(dto.getIdCompetition(), dto.getIdCompetitor());
-   ctx.json(Map.of("result","success"));
+   radioProgram.addInscription(dto.getIdCompetition(),
+     dto.getIdCompetitor());
+   ctx.json(Map.of("result", "success"));
   };
  }
 
  private Handler allCompetitions() {
   return ctx -> {
    var competitions = radioProgram.availableCompetitions();
-   
-   var list = new ArrayList<Map<String, String>>();
 
+   var list = new ArrayList<Map<String, String>>();
+   
+   
    for (RadioCompetition c : competitions) {
     var toJson = new HashMap<String, String>();
     toJson.put("id", String.valueOf(c.id()));

@@ -4,6 +4,6 @@ public interface Event {
 
  void publish(String type, String value);
 
- void listenTo(OnMessageReceived onMessage);
+ void listenTo(String msgName, OnMessageReceived onMessage);
 
 }
