@@ -1,5 +1,9 @@
 package competition.model;
 
+import competitions.ports.Event;
+import competitions.ports.ListenerRepository;
+import competitions.ports.OnMessageReceived;
+
 public class NewListener implements OnMessageReceived {
  private ListenerRepository repository;
  private Event event;

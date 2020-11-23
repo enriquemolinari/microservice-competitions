@@ -1,7 +1,7 @@
 package competition.infrastructure;
 
-import competition.model.Event;
-import competition.model.OnMessageReceived;
+import competitions.ports.Event;
+import competitions.ports.OnMessageReceived;
 import redis.clients.jedis.Jedis;
 
 public class RedisEvent implements Event {

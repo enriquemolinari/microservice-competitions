@@ -1,4 +1,4 @@
-package competition.model;
+package competitions.ports;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

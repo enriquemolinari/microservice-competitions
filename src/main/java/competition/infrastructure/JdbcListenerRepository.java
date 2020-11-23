@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import competition.model.ListenerRepository;
-import competition.model.RadioException;
+import competitions.ports.ListenerRepository;
+import competitions.ports.RadioException;
 
 public class JdbcListenerRepository implements ListenerRepository {
 
