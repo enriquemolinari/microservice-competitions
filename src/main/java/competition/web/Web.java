@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import competitions.ports.RadioCompetition;
-import competitions.ports.RadioException;
-import competitions.ports.RadioProgram;
+import competitions.model.ports.RadioCompetition;
+import competitions.model.ports.RadioException;
+import competitions.model.ports.RadioProgram;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 

@@ -1,6 +1,6 @@
 package competition.infrastructure;
 
-import competitions.ports.OnMessageReceived;
+import competitions.model.ports.OnMessageReceived;
 import redis.clients.jedis.JedisPubSub;
 
 public class RedisMessageReceived extends JedisPubSub {

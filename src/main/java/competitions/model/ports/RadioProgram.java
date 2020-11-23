@@ -1,4 +1,4 @@
-package competitions.ports;
+package competitions.model.ports;
 
 public interface RadioProgram {
 

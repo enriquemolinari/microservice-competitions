@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import competitions.ports.CompetitionRepository;
-import competitions.ports.RadioCompetition;
-import competitions.ports.RadioException;
-import competitions.ports.RadioProgram;
+import competitions.model.ports.CompetitionRepository;
+import competitions.model.ports.RadioCompetition;
+import competitions.model.ports.RadioException;
+import competitions.model.ports.RadioProgram;
 
 public class DefaultRadioProgram implements RadioProgram {
 

@@ -1,4 +1,4 @@
-package competitions.ports;
+package competitions.model.ports;
 
 public interface ListenerRepository {
  void addNewListener(int idListener, String email);

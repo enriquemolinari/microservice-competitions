@@ -1,9 +1,9 @@
 package competition.model;
 
-import competitions.ports.Event;
-import competitions.ports.ListenerRepository;
-import competitions.ports.RadioCompetition;
-import competitions.ports.RadioProgram;
+import competitions.model.ports.Event;
+import competitions.model.ports.ListenerRepository;
+import competitions.model.ports.RadioCompetition;
+import competitions.model.ports.RadioProgram;
 
 public class PublishInscriptionAdded implements RadioProgram {
 

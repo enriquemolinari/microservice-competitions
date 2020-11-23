@@ -1,4 +1,4 @@
-package competitions.ports;
+package competitions.model.ports;
 
 import java.util.List;
 import java.util.Optional;

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import competitions.ports.RadioException;
+import competitions.model.ports.RadioException;
 
 public class JdbcConn {
  public String user;
